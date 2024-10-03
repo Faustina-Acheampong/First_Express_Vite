@@ -28,32 +28,32 @@ function App() {
 
   return (
     <>
-      <header>
-        <h1>Vite and Express</h1>
-      </header>
-      <div className="flowers">
-        <h2>List of Flowers</h2>
-        {array.map((flower, index) => (
-          <ul key={index}>
-            <li>{flower}</li>
-          </ul>
-        ))}
-      </div>
-      <div className='personal-details'>
-        <h2>Personal Information</h2>
-        {person ? (
-          <div>
-            <p><strong>Name:</strong> {person.name}</p>
-            <p><strong>Age:</strong> {person.age}</p>
-            <p><strong>Gender:</strong> {person.gender}</p>
-            <p><strong>Occupation:</strong> {person.occupation}</p>
-            <p><strong>Email:</strong> {person.email}</p>
-            <p><strong>Telephone:</strong> {person.telephone}</p>
-          </div>
-          ) : (
-          <p>Loading...</p>
-        )}
+      <header>Recruitment</header>
+      <div className="container">
+        <div className="column">
+          <h1 id="flowers">List of Flowers</h1>
+          {array.map((flower, index) => (
+            <ul key={index}>
+              <li>{flower}</li>
+            </ul>
+          ))}
         </div>
+        <div className="column">
+          <h1 id="person">Personal Information</h1>
+          {person ? (
+            <div className="person-info">
+              <p><strong>Name:</strong> {person.name}</p>
+              <p><strong>Age:</strong> {person.age}</p>
+              <p><strong>Gender:</strong> {person.gender}</p>
+              <p><strong>Occupation:</strong> {person.occupation}</p>
+              <p><strong>Email:</strong> {person.email}</p>
+              <p><strong>Telephone:</strong> {person.telephone}</p>
+            </div>
+            ) : (
+            <p>Loading...</p>
+          )}
+          </div>
+      </div>  
     </>
   );
 }
