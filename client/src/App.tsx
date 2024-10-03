@@ -37,7 +37,7 @@ function App() {
 
   return (
     <>
-      <header>Recruitment</header>
+      <header>Recruitment.</header>
       <div className="container">
         <div className="column">
           <h1 id="agencies">Agencies</h1>
