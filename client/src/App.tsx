@@ -7,23 +7,23 @@ function App() {
   const [person, setPerson] = useState<Person | null>(null);
 
   const fetchFlowers = async () => {
-    const response = await axios.get("http://localhost:3000/api");
+    const response = await axios.get("http://localhost:3000/api/flowers");
     setArray(response.data.flowers);
   };
 
   const fetchPerson = async () => {
     try {
-      const res = await fetch('/api/person');
-      const data = await res.json();
-      setPerson(data);
-    } catch (err) {
-      console.error(err);
+      const response = await axios.get("http://localhost:3000/api/person");
+      setPerson(response.data);
+    }
+    catch (err) {
+      console.error("Error fetching person data:", err);
     }
   };
 
   useEffect(() => {
     fetchFlowers()
-    fetchPerson()
+    fetchPerson()  
   }, []);
 
   return (
