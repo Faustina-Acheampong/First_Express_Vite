@@ -7,8 +7,8 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 
-app.get("/api/flowers", (req, res) => {
-    res.json({flowers: ["Rose", "Tulip", "Daisy", "Orchid", "Iris"] });
+app.get("/api/agencies", (req, res) => {
+    res.json({flowers: ["Indeed", "Adecco", "Hays", "Reed", "Pertemps"] });
 });
 
 const person = {

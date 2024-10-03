@@ -2,13 +2,22 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import axios from 'axios'
 
+interface Person {
+  name: string;
+  age: number;
+  gender: string;
+  occupation: string;
+  email: string;
+  telephone: string;
+};
+   
 function App() {
-  const [array, setArray] = useState([]);
+  const [agencies, setAgencies] = useState([]);
   const [person, setPerson] = useState<Person | null>(null);
 
-  const fetchFlowers = async () => {
-    const response = await axios.get("http://localhost:3000/api/flowers");
-    setArray(response.data.flowers);
+  const fetchAgencies = async () => {
+    const response = await axios.get("http://localhost:3000/api/agencies");
+    setAgencies(response.data.agencies);
   };
 
   const fetchPerson = async () => {
@@ -22,7 +31,7 @@ function App() {
   };
 
   useEffect(() => {
-    fetchFlowers()
+    fetchAgencies()
     fetchPerson()  
   }, []);
 
@@ -31,10 +40,10 @@ function App() {
       <header>Recruitment</header>
       <div className="container">
         <div className="column">
-          <h1 id="flowers">List of Flowers</h1>
-          {array.map((flower, index) => (
+          <h1 id="agencies">Agencies</h1>
+          {agencies.map((agency, index) => (
             <ul key={index}>
-              <li>{flower}</li>
+              <li>{agency}</li>
             </ul>
           ))}
         </div>
@@ -58,14 +67,5 @@ function App() {
   );
 }
 
-interface Person {
-  name: string;
-  age: number;
-  gender: string;
-  occupation: string;
-  email: string;
-  telephone: string;
-};
-   
   
 export default App
