@@ -1,51 +1,71 @@
 import { useState, useEffect } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
 import axios from 'axios'
 
 function App() {
-  const [count, setCount] = useState(0)
   const [array, setArray] = useState([]);
+  const [person, setPerson] = useState<Person | null>(null);
 
-  const fetchApi = async () => {
+  const fetchFlowers = async () => {
     const response = await axios.get("http://localhost:3000/api");
     setArray(response.data.flowers);
   };
 
+  const fetchPerson = async () => {
+    try {
+      const res = await fetch('/api/person');
+      const data = await res.json();
+      setPerson(data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   useEffect(() => {
-    fetchApi()
+    fetchFlowers()
+    fetchPerson()
   }, []);
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
+      <header>
+        <h1>Vite and Express</h1>
+      </header>
+      <div className="flowers">
+        <h2>List of Flowers</h2>
         {array.map((flower, index) => (
           <ul key={index}>
             <li>{flower}</li>
           </ul>
         ))}
       </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div className='personal-details'>
+        <h2>Personal Information</h2>
+        {person ? (
+          <div>
+            <p><strong>Name:</strong> {person.name}</p>
+            <p><strong>Age:</strong> {person.age}</p>
+            <p><strong>Gender:</strong> {person.gender}</p>
+            <p><strong>Occupation:</strong> {person.occupation}</p>
+            <p><strong>Email:</strong> {person.email}</p>
+            <p><strong>Telephone:</strong> {person.telephone}</p>
+          </div>
+          ) : (
+          <p>Loading...</p>
+        )}
+        </div>
     </>
-  )
+  );
 }
 
+interface Person {
+  name: string;
+  age: number;
+  gender: string;
+  occupation: string;
+  email: string;
+  telephone: string;
+};
+   
+  
 export default App
